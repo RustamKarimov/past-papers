@@ -74,7 +74,7 @@ CRR = [
         "direction": RIGHT,
         "align_to": 0,
         "alignment": UP,
-        "height": 0.49,
+        "height": 0.48,
         "width": 0.49
     },
     {
@@ -82,7 +82,7 @@ CRR = [
         "direction": DOWN,
         "align_to": 1,
         "alignment": LEFT,
-        "height": 0.49,
+        "height": 0.48,
         "width": 0.49
     }
 ]
