@@ -10,14 +10,19 @@ from utilitites import latex_utilities as lu
 
 from settings.file_settings import BASE_DIR
 
+
 class Question_6_1(Scene):
     def __init__(self):
         self.question = BASE_DIR / "Physics" / "2022" / "Question_6" / "question_6_1.txt"
         super().__init__()
 
     def construct(self):
-        titles = ("Question:", "Diagram:", "Solution:")
-        box_details = get_box_details(box_structure="rcc", titles=titles)
+        titles = ("Question:", "Graph:", "Solution:")
+        box_sizes = ((1, 0.4), (0.49, 0.58), (0.49, 0.58))
+        box_details = get_box_details(box_structure="rcc", titles=titles, box_sizes=box_sizes)
+
+        for detail in box_details:
+            print(detail)
 
         titles, boxes = stage.set_the_stage(
             scene=self,
@@ -28,3 +33,5 @@ class Question_6_1(Scene):
         question_title = titles[0]
         question_kwargs = {"tex_environment": lu.get_tabular_environment(p_size=16)}
         get_the_question(self, question_title, self.question, **question_kwargs)
+
+        

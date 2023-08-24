@@ -202,6 +202,6 @@ def get_box_details(box_structure: str, titles: tuple, box_sizes: tuple = None):
     for box, title, size in zip(structure, titles, box_sizes):
         box["title"] = title
         if size:
-            box["height"] = size[0]
-            box["width"] = size[1]
+            box["width"] = size[0]
+            box["height"] = size[1]
     return structure

@@ -14,4 +14,4 @@ tex_environment = "\\begin{tabular}{p{18 cm}}{\\flushleft}"
 half_tex_environment = "\\begin{tabular}{p{8 cm}}{\\flushleft}"
 
 
-READING_SPEED = 25  # Characters per second
+READING_SPEED = 20  # Characters per second
