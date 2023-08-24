@@ -13,12 +13,23 @@ default_kwargs = {
 }
 
 
-def get_tabular_environment(p_size=18, alignment="flushleft"):
+def get_tabular_environment(p_size: int = 18, alignment: str = "flushleft") -> str:
+    """
+    Generates a tabular environment with a respective paragraph size.
+    :param p_size: the size of the paragraph line
+    :param alignment: Alignment style of the text in the paragraph.
+    :return: String containing the tex_environment
+    """
     tex_environment = f"\\begin{{tabular}}{{p{{{p_size} cm}}}}{{\\{alignment}}}"
     return tex_environment
 
 
-def read_the_text_file(question: Path = None):
+def read_the_text_file(question: Path = None) -> list:
+    """
+    Reads the contents of a text file and splits it into paragraphs
+    :param question: The question file where all the text is stored
+    :return: list of paragraphs
+    """
     if question is None:
         raise ValueError("Question path is not defined")
 
@@ -27,7 +38,15 @@ def read_the_text_file(question: Path = None):
         return lines
 
 
-def display_a_paragraph(scene: Scene, tex_mobject):
+def display_a_paragraph(scene: Scene, tex_mobject: Tex) -> None:
+    """
+    Calculates the length of a paragraph and then average time it takes to read the paragraph.
+    The number of characters which can be read in 1 second is stored in READING_SPEED variable.
+    This variable can be adjusted in the tex_settings.py.
+    :param scene: A scene where the paragraph will be displayed
+    :param tex_mobject: A mobject which  will be displayed
+    :return: None
+    """
     length_of_tex = len(tex_mobject)
     run_time = length_of_tex // READING_SPEED
 
@@ -35,7 +54,15 @@ def display_a_paragraph(scene: Scene, tex_mobject):
     scene.wait()
 
 
-def display_paragraphs(scene: Scene, align_to: Tex, paragraphs, **kwargs):
+def display_paragraphs(scene: Scene, align_to: Tex, paragraphs: list, **kwargs) -> None:
+    """
+    Animates and displays the tex paragraphs on the scene.
+    :param scene: The scene where paragraphs will be displayed
+    :param align_to: A reference mobject for the alignment of paragraphs
+    :param paragraphs: A list of paragraph texts
+    :param kwargs: extra parameters
+    :return: None
+    """
     alignment = align_to
     tex_kwargs = {**default_kwargs, **kwargs}
     for paragraph in paragraphs:
@@ -45,6 +72,16 @@ def display_paragraphs(scene: Scene, align_to: Tex, paragraphs, **kwargs):
         display_a_paragraph(scene, paragraph_tex)
 
 
-def get_the_question(scene: Scene, align_to: Tex, question: Path = None, **kwargs):
+def get_the_question(scene: Scene, align_to: Tex, question: Path = None, **kwargs) -> None:
+    """
+    Reads the question text from the provided path and then
+    animates and displays them on the provided scene. provided text
+    is aligned to the mobject provided as the align_to.
+    :param scene: Scene on which the question will be displayed
+    :param align_to: A reference object for the alignment
+    :param question: The path to the question containing the text
+    :param kwargs: any extra parameters
+    :return: None
+    """
     paragraphs = read_the_text_file(question)
     display_paragraphs(scene, align_to, paragraphs, **kwargs)
