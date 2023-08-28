@@ -60,7 +60,6 @@ def get_the_graph(kwargs: dict) -> (VGroup, dict):
             A dictionary to control each of the parts above separately.
     """
     axes_kwargs = get_axes_kwargs(kwargs["graph_kwargs"])
-    print(axes_kwargs)
     axes = Axes(**axes_kwargs)
 
     x_label = get_axis_label(
