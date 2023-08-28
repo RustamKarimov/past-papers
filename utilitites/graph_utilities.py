@@ -32,7 +32,7 @@ def get_axis_label(axes: Axes, axis: str, label_settings,  label_kwargs: dict) -
     get_label = getattr(axes, f"get_{axis}_axis_label")
 
     return get_label(
-        MathTex(label, font_size=label_font_size).scale(0.5),
+        MathTex(label, font_size=label_font_size),
         edge=label_edge,
         direction=label_direction,
         buff=label_buff

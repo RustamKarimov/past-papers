@@ -5,11 +5,13 @@ from pathlib import Path
 
 from utilitites import stage_setup as stage
 from utilitites.box_alignments import get_box_details
-from utilitites.latex_utilities import get_the_question
+from utilitites.latex_utilities import get_the_question, display_paragraphs
 from utilitites import latex_utilities as lu
 from utilitites import graph_utilities as gu
 
 from settings.file_settings import BASE_DIR
+from settings.tex_settings import tick
+from settings.stage_settings import MEDIUM_TEX_SIZE
 
 
 class Question_6_1(Scene):
@@ -33,7 +35,7 @@ class Question_6_1(Scene):
 
         question_title = titles[0]
         question_kwargs = {"tex_environment": lu.get_tabular_environment(p_size=16)}
-        get_the_question(self, question_title, self.question, **question_kwargs)
+        _ = get_the_question(self, question_title, self.question, **question_kwargs)
 
         graph_box = boxes[1]
         graph_kwargs = {
@@ -50,9 +52,7 @@ class Question_6_1(Scene):
                 "y_label_rotation": PI / 2,
                 "y_label_buff": 0.05
             },
-            "plot_kwargs": {
-                "x_range": [0, 0.8]
-            }
+            "plot_kwargs": {}
         }
 
         graph, graph_dict = gu.get_the_graph(graph_kwargs)
@@ -60,4 +60,15 @@ class Question_6_1(Scene):
         self.play(FadeIn(graph))
         self.wait()
 
+        solution_title = titles[2]
+        response = "Doppler effect"
+        solution_kwargs = {"tex_environment": lu.get_tabular_environment(p_size=7)}
+        responses = display_paragraphs(self, solution_title, [response], **solution_kwargs)
+
+        tick_1 = tick.copy()
+        tick_1.font_size = MEDIUM_TEX_SIZE
+        tick_1.next_to(responses[0], RIGHT, buff=0.2)
+
+        self.play(Write(tick_1))
+        self.wait()
         

@@ -48,31 +48,35 @@ def display_a_paragraph(scene: Scene, tex_mobject: Tex) -> None:
     :return: None
     """
     length_of_tex = len(tex_mobject)
-    run_time = length_of_tex // READING_SPEED
+    run_time = length_of_tex // READING_SPEED + 1
 
     scene.play(Create(tex_mobject), run_time=run_time)
     scene.wait()
 
 
-def display_paragraphs(scene: Scene, align_to: Tex, paragraphs: list, **kwargs) -> None:
+def display_paragraphs(scene: Scene, align_to: Tex, paragraphs: list, **kwargs) -> VGroup:
     """
     Animates and displays the tex paragraphs on the scene.
     :param scene: The scene where paragraphs will be displayed
     :param align_to: A reference mobject for the alignment of paragraphs
     :param paragraphs: A list of paragraph texts
     :param kwargs: extra parameters
-    :return: None
+    :return: Vgroup consisting of paragraph mobjects
     """
     alignment = align_to
     tex_kwargs = {**default_kwargs, **kwargs}
+    paragraph_group = VGroup()
     for paragraph in paragraphs:
         paragraph_tex = Tex(paragraph, **tex_kwargs)[0]
         paragraph_tex.next_to(alignment, DOWN, buff=0.3, aligned_edge=LEFT)
         alignment = paragraph_tex
         display_a_paragraph(scene, paragraph_tex)
+        paragraph_group.add(paragraph_tex)
+
+    return paragraph_group
 
 
-def get_the_question(scene: Scene, align_to: Tex, question: Path = None, **kwargs) -> None:
+def get_the_question(scene: Scene, align_to: Tex, question: Path = None, **kwargs) -> VGroup:
     """
     Reads the question text from the provided path and then
     animates and displays them on the provided scene. provided text
@@ -81,7 +85,7 @@ def get_the_question(scene: Scene, align_to: Tex, question: Path = None, **kwarg
     :param align_to: A reference object for the alignment
     :param question: The path to the question containing the text
     :param kwargs: any extra parameters
-    :return: None
+    :return: Vgroup() consisting of paragraph mobjects
     """
     paragraphs = read_the_text_file(question)
-    display_paragraphs(scene, align_to, paragraphs, **kwargs)
+    return display_paragraphs(scene, align_to, paragraphs, **kwargs)

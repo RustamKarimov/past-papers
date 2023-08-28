@@ -22,7 +22,7 @@ X_LABEL_SETTINGS = {
     "x_label_edge": UR,
     "x_label_direction": UR,
     "x_label_buff": 0.1,
-    "x_label_font_size": ss.MEDIUM_TEX_SIZE,
+    "x_label_font_size": ss.SMALL_TEX_SIZE,
     "x_label_rotation": 0,
 }
 
@@ -31,12 +31,12 @@ Y_LABEL_SETTINGS = {
     "y_label_edge": UR,
     "y_label_direction": UR,
     "y_label_buff": 0.1,
-    "y_label_font_size": ss.MEDIUM_TEX_SIZE,
+    "y_label_font_size": ss.SMALL_TEX_SIZE,
     "y_label_rotation": 0,
 }
 
 PLOT_SETTINGS = {
-    "x_range": [0, 1],
-    "y_range": [0, 1],
+    "x_range": [0, 0.8],
+    "y_range": [0, 0.8],
     "function": lambda x: x,
 }
