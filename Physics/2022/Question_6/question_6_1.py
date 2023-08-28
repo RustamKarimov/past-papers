@@ -7,6 +7,7 @@ from utilitites import stage_setup as stage
 from utilitites.box_alignments import get_box_details
 from utilitites.latex_utilities import get_the_question
 from utilitites import latex_utilities as lu
+from utilitites import graph_utilities as gu
 
 from settings.file_settings import BASE_DIR
 
@@ -33,5 +34,30 @@ class Question_6_1(Scene):
         question_title = titles[0]
         question_kwargs = {"tex_environment": lu.get_tabular_environment(p_size=16)}
         get_the_question(self, question_title, self.question, **question_kwargs)
+
+        graph_box = boxes[1]
+        graph_kwargs = {
+            "graph_kwargs": {},
+            "x_label_kwargs": {
+                "x_label": "f_s (Hz)",
+                "x_label_edge": DOWN,
+                "x_label_direction": DOWN,
+            },
+            "y_label_kwargs": {
+                "y_label": "f_L (Hz)",
+                "y_label_edge": LEFT,
+                "y_label_direction": LEFT,
+                "y_label_rotation": PI / 2,
+                "y_label_buff": 0.05
+            },
+            "plot_kwargs": {
+                "x_range": [0, 0.8]
+            }
+        }
+
+        graph, graph_dict = gu.get_the_graph(graph_kwargs)
+        graph.move_to(graph_box)
+        self.play(FadeIn(graph))
+        self.wait()
 
         
