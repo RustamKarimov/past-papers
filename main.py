@@ -12,10 +12,10 @@ DISABLE = False
 SUBJECT = "Physics"
 YEAR = "2022"
 QUESTION = "6"
-SUB_QUESTION = "3"
+SUB_QUESTION = "4"
 FILE = fs.BASE_DIR / SUBJECT / YEAR / f"Question_{QUESTION}" / f"question_{QUESTION}_{SUB_QUESTION}.py"
 SCENE = f"Question_{QUESTION}_{SUB_QUESTION}"
-QUALITY = "h"
+QUALITY = "l"
 CUSTOM_FOLDERS = "--custom_folders"
 DISABLE_CACHING = "--disable_caching" if DISABLE else ""
 

@@ -1,0 +1,2 @@
+The gradient of the graph obtained is found to be $1,06$.
+If the speed of sound in air is  $340 \, m \times s^{-1}$, calculate the magnitude of the velocity at which the learner approaches the source.
