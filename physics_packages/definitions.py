@@ -34,3 +34,9 @@ NON_CONSERVATIVE_FORCE_2 = """
 A force is non-conservative if the work it does in moving an object around a
 closed path is non-zero.
 """
+
+COULOMBS_LAW = """
+The magnitude of the electrostatic force exerted by one point charge on another 
+is directly proportional to the product of the magnitudes of the charges 
+and inversely proportional to the square of the distance between them.
+"""
