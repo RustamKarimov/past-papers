@@ -1,0 +1,2 @@
+The investigation is now repeated with the learner moving at a HIGHER constant velocity towards the sound source.
+Copy the graph above in your ANSWER BOOK and label it as \textbf{A}. On the same set of axes, sketch the graph that will be obtained when the learner is moving at the HIGHER velocity. Label this graph as \textbf{B}.
