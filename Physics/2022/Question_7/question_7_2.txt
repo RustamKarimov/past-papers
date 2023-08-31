@@ -1,0 +1,3 @@
+A charged sphere \textbf{M} is suspended from a ceiling by a light inextensible, insulated string.
+Another charged sphere \textbf{N}, of mass $2,04 \times 10^{-3} \, kg$ and carrying a charge of $+8,6 \times 10^{-8} \, C$, hangs STATIONARY vertically below sphere \textbf{M}. The centres of the spheres are $0,3 \, m$ apart, as shown in the diagram below.
+State whether the charge on sphere \textbf{M} is POSITIVE or NEGATIVE.
