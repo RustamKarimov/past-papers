@@ -4,11 +4,12 @@ from utilitites import stage_setup as stage
 from utilitites.box_alignments import get_box_details
 from utilitites.latex_utilities import get_the_question, display_paragraphs
 from utilitites import latex_utilities as lu
-from settings.tex_settings import tick
 from utilitites import graph_utilities as gu
 
 from settings.class_settings import QuestionScene
 from settings.stage_settings import MEDIUM_TEX_SIZE
+from settings.tex_settings import tick
+from settings.graph_settings import PlotSettings
 
 
 class Question_6_3(QuestionScene):
@@ -28,6 +29,7 @@ class Question_6_3(QuestionScene):
         _ = get_the_question(self, question_title, self.question, **question_kwargs)
 
         graph_box = boxes[1]
+        plot_settings = PlotSettings()
         graph_kwargs = {
             "graph_kwargs": {},
             "x_label_kwargs": {
@@ -42,7 +44,7 @@ class Question_6_3(QuestionScene):
                 "y_label_rotation": PI / 2,
                 "y_label_buff": 0.05
             },
-            "plot_kwargs": {}
+            "plot_kwargs": plot_settings
         }
 
         graph, graph_dict = gu.get_the_graph(graph_kwargs)

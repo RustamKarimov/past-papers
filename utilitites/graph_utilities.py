@@ -74,7 +74,7 @@ def get_the_graph(kwargs: dict) -> (VGroup, dict):
         label_settings=gs.Y_LABEL_SETTINGS,
         label_kwargs=kwargs["y_label_kwargs"])
 
-    plot = axes.plot(**get_plot_kwargs(kwargs["plot_kwargs"]))
+    plot = axes.plot(**kwargs["plot_kwargs"].as_dict())
     graph_dict = {
         "axes": axes,
         "plot": plot,
