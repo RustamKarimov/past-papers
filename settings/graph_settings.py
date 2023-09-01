@@ -1,5 +1,8 @@
 from manim import *
 
+from collections.abc import Sequence, Callable
+from dataclasses import dataclass, field
+
 from settings import stage_settings as ss
 
 GRAPH_SETTINGS = {
@@ -40,3 +43,10 @@ PLOT_SETTINGS = {
     "y_range": [0, 0.8],
     "function": lambda x: x,
 }
+
+
+@dataclass
+class PlotSettings:
+    x_range: Sequence[float] = field(default_factory=lambda: (0, 0.8))
+    y_range: Sequence[float] = field(default_factory=lambda: (0, 0.8))
+    function: Callable = field(default_factory=lambda x: x)
