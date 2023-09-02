@@ -57,11 +57,11 @@ class PlotSettings:
 class AxisLabelSettings:
     axis: str = "x"
     label: str = "x"
-    label_edge: ndarray = field(default_factory=lambda: UR)
-    label_direction: ndarray = field(default_factory=lambda: UR)
-    buff: int = 0.1
+    edge: ndarray = field(default_factory=lambda: UR)
+    direction: ndarray = field(default_factory=lambda: UR)
+    buff: float = 0.1
     font_size: int = ss.SMALL_TEX_SIZE
-    angle: int = 0
+    angle: float = 0
 
 
 @dataclass
@@ -76,14 +76,28 @@ class AxisConfig:
 
 
 @dataclass
-class GraphSettings:
+class AxesSettings:
     x_range: Sequence[float] = field(default_factory=lambda: (0, 1))
     y_range: Sequence[float] = field(default_factory=lambda: (0, 1))
     x_length: int = 2
     y_length: int = 2
     axis_config: AxisConfig = field(default_factory=AxisConfig)
-    x_axis_config: AxisLabelSettings = field(default_factory=AxisLabelSettings)
-    y_axis_config: AxisLabelSettings = field(default_factory=AxisLabelSettings)
 
     def as_dict(self):
         return asdict(self)
+
+
+@dataclass
+class GraphSettings:
+    axes_settings: AxesSettings = field(default_factory=AxesSettings)
+    x_label_settings: AxisLabelSettings = field(default_factory=AxisLabelSettings)
+    y_label_settings: AxisLabelSettings = field(default_factory=AxisLabelSettings)
+    plot_settings: PlotSettings = field(default_factory=PlotSettings)
+
+
+@dataclass
+class GraphParts:
+    axes: Axes
+    x_label: Mobject
+    y_label: Mobject
+    plot: Mobject
