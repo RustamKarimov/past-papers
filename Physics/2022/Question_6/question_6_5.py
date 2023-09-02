@@ -10,6 +10,7 @@ from utilitites import animations as anim
 from settings.class_settings import QuestionScene
 from settings import stage_settings as ss
 from settings.tex_settings import tick
+from settings import graph_settings as gs
 
 
 class Question_6_5(QuestionScene):
@@ -31,24 +32,28 @@ class Question_6_5(QuestionScene):
         paragraphs = get_the_question(self, question_title, self.question, **question_kwargs)
 
         graph_box = boxes[1]
-        graph_kwargs = {
-            "graph_kwargs": {},
-            "x_label_kwargs": {
-                "x_label": "f_s (Hz)",
-                "x_label_edge": DOWN,
-                "x_label_direction": DOWN,
-            },
-            "y_label_kwargs": {
-                "y_label": "f_L (Hz)",
-                "y_label_edge": LEFT,
-                "y_label_direction": LEFT,
-                "y_label_rotation": PI / 2,
-                "y_label_buff": 0.05
-            },
-            "plot_kwargs": {}
-        }
+        plot_settings = gs.PlotSettings()
+        x_label_settings = gs.AxisLabelSettings(
+            axis="x",
+            label="f_s (Hz)",
+            edge=DOWN,
+            direction=DOWN
+        )
+        y_label_settings = gs.AxisLabelSettings(
+            axis="y",
+            label="f_L (Hz)",
+            edge=LEFT,
+            direction=LEFT,
+            angle=PI / 2,
+            buff=0.05
+        )
+        graph_settings = gs.GraphSettings(
+            x_label_settings=x_label_settings,
+            y_label_settings=y_label_settings,
+            plot_settings=plot_settings
+        )
 
-        graph, graph_dict = gu.get_the_graph(graph_kwargs)
+        graph, graph_parts = gu.generate_the_graph(graph_settings)
         graph.scale(1.8).move_to(graph_box).shift(DOWN * 0.8)
         self.play(FadeIn(graph))
         self.wait()
@@ -57,7 +62,7 @@ class Question_6_5(QuestionScene):
         label_a = Tex("A", **tex_kwargs)
         label_b = Tex("B", **tex_kwargs)
 
-        plot = graph_dict["plot"]
+        plot = graph_parts.plot
         label_a.next_to(plot.get_end(), UR, buff=0.1)
 
         self.play(Write(label_a))
@@ -82,7 +87,7 @@ class Question_6_5(QuestionScene):
         frame_1 = SurroundingRectangle(equations[1][7:11])
         self.play(Create(frame_1), rate_func=rate_functions.there_and_back, run_time=3)
 
-        axes = graph_dict["axes"]
+        axes = graph_parts.axes
         plot_2 = axes.plot(
             function=lambda x: x * 1.6,
             x_range=[0, 0.5]
