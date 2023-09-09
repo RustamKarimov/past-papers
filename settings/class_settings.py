@@ -1,6 +1,7 @@
 from manim import *
 
 from settings.file_settings import BASE_DIR
+from pathlib import Path
 
 
 class QuestionScene(Scene):

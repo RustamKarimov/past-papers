@@ -2,14 +2,14 @@ from manim import *
 
 from utilitites import stage_setup as stage
 from utilitites.box_alignments import get_box_details
-from utilitites.latex_utilities import get_the_question, display_paragraphs
+from utilitites.latex_utilities import get_the_question
 from utilitites import latex_utilities as lu
-
-from physics_packages.definitions import COULOMBS_LAW
 
 from settings.class_settings import QuestionScene
 from settings import stage_settings as ss
-from settings.tex_settings import tick
+# from settings.tex_settings import tick
+
+from diagram_for_q7 import diagram
 
 
 class Question_7_2(QuestionScene):
@@ -31,4 +31,8 @@ class Question_7_2(QuestionScene):
         }
         _ = get_the_question(self, question_title, self.question, **question_kwargs)
 
+        diagram_box = boxes[1]
+        diagram.scale(0.6).move_to(diagram_box)
 
+        self.play(FadeIn(diagram))
+        self.wait()

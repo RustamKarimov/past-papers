@@ -6,16 +6,15 @@ from dataclasses import dataclass, field
 from settings import stage_settings as ss
 
 
-class Label:
-    label: str
-    position: np.ndarray = ORIGIN
-    color: str = ss.TEXT_COLOR
-    font_size: int = ss.MEDIUM_TEX_SIZE
-    buff: float = 0
-    angle: float = 0
-
-
 @dataclass
-class Surface:
-    shape: object = field(default_factory=Line)
+class DiagramPart:
+    label: str
+    function: type = None
+    position_function: str = None
+    rotation_angle: float = 0
+    scale: float = 1
+
+    function_kwargs: dict = field(default_factory=lambda: {})
+    position_kwargs: dict = field(default_factory=lambda: {})
+    rotation_kwargs: dict = field(default_factory=lambda: {})
 

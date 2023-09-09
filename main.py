@@ -7,12 +7,12 @@ from subprocess import run
 
 from settings import file_settings as fs
 
-DISABLE = False
+DISABLE = True
 
 SUBJECT = "Physics"
 YEAR = "2022"
-QUESTION = "6"
-SUB_QUESTION = "5"
+QUESTION = "7"
+SUB_QUESTION = "2"
 FILE = fs.BASE_DIR / SUBJECT / YEAR / f"Question_{QUESTION}" / f"question_{QUESTION}_{SUB_QUESTION}.py"
 SCENE = f"Question_{QUESTION}_{SUB_QUESTION}"
 QUALITY = "l"
