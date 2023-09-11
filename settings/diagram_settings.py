@@ -13,6 +13,7 @@ class DiagramPart:
     position_function: str = None
     rotation_angle: float = 0
     scale: float = 1
+    actions_to_take = ["all"]
 
     function_kwargs: dict = field(default_factory=lambda: {})
     position_kwargs: dict = field(default_factory=lambda: {})
