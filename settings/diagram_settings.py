@@ -3,7 +3,30 @@ from manim import *
 
 from dataclasses import dataclass, field
 
+from typing import List
+
 from settings import stage_settings as ss
+
+
+@dataclass
+class IndividualAction:
+    name: str
+    target: str
+    function: str
+    function_kwargs: dict = field(default_factory=lambda: {})
+
+
+@dataclass
+class Action:
+    function: str
+    kwargs: dict
+
+
+@dataclass
+class Section:
+    parts: list
+    individual_actions: List[IndividualAction]
+    actions: List[Action]
 
 
 @dataclass
