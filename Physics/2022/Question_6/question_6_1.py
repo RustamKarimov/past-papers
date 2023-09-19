@@ -12,6 +12,7 @@ from utilitites import graph_utilities as gu
 from settings.file_settings import BASE_DIR
 from settings.tex_settings import tick
 from settings.stage_settings import MEDIUM_TEX_SIZE
+from settings import graph_settings as gs
 
 
 class Question_6_1(Scene):
@@ -21,8 +22,7 @@ class Question_6_1(Scene):
 
     def construct(self):
         titles = ("Question:", "Graph:", "Solution:")
-        box_sizes = ((1, 0.4), (0.49, 0.58), (0.49, 0.58))
-        box_details = get_box_details(box_structure="rcc", titles=titles, box_sizes=box_sizes)
+        box_details = get_box_details(box_structure="crr", titles=titles)
 
         titles, boxes = stage.set_the_stage(
             scene=self,
@@ -31,28 +31,33 @@ class Question_6_1(Scene):
         )
 
         question_title = titles[0]
-        question_kwargs = {"tex_environment": lu.get_tabular_environment(p_size=16)}
+        question_kwargs = {"tex_environment": lu.get_tabular_environment(p_size=8)}
         _ = get_the_question(self, question_title, self.question, **question_kwargs)
 
         graph_box = boxes[1]
-        graph_kwargs = {
-            "graph_kwargs": {},
-            "x_label_kwargs": {
-                "x_label": "f_s (Hz)",
-                "x_label_edge": DOWN,
-                "x_label_direction": DOWN,
-            },
-            "y_label_kwargs": {
-                "y_label": "f_L (Hz)",
-                "y_label_edge": LEFT,
-                "y_label_direction": LEFT,
-                "y_label_rotation": PI / 2,
-                "y_label_buff": 0.05
-            },
-            "plot_kwargs": {}
-        }
+        plot_settings = gs.PlotSettings()
+        x_label_settings = gs.AxisLabelSettings(
+            axis="x",
+            label="f_s (Hz)",
+            edge=DOWN,
+            direction=DOWN
+        )
+        y_label_settings = gs.AxisLabelSettings(
+            axis="y",
+            label="f_L (Hz)",
+            edge=LEFT,
+            direction=LEFT,
+            angle=PI / 2,
+            buff=0.05
+        )
+        graph_settings = gs.GraphSettings(
+            x_label_settings=x_label_settings,
+            y_label_settings=y_label_settings,
+            plot_settings=plot_settings
+        )
 
-        graph, graph_dict = gu.get_the_graph(graph_kwargs)
+        graph, graph_parts = gu.generate_the_graph(graph_settings)
+
         graph.move_to(graph_box)
         self.play(FadeIn(graph))
         self.wait()

@@ -25,8 +25,8 @@ class Action:
 @dataclass
 class Section:
     parts: list
-    individual_actions: List[IndividualAction]
-    actions: List[Action]
+    individual_actions: List[IndividualAction] = field(default_factory=lambda: [])
+    actions: List[Action] = field(default_factory=lambda: [])
 
 
 @dataclass
@@ -36,7 +36,12 @@ class DiagramPart:
     position_function: str = None
     rotation_angle: float = 0
     scale: float = 1
-    actions_to_take = ["all"]
+    actions_to_take: List = field(default_factory=lambda: [])
+    reference: str = None
+
+    function_args: list = field(default_factory=lambda: [])
+    position_args: list = field(default_factory=lambda: [])
+    rotation_args: list = field(default_factory=lambda: [])
 
     function_kwargs: dict = field(default_factory=lambda: {})
     position_kwargs: dict = field(default_factory=lambda: {})

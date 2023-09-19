@@ -3,17 +3,28 @@ from manim import *
 
 def draw_a_part(diagram_part):
     function = diagram_part.function
+    function_args = diagram_part.function_args
     function_kwargs = diagram_part.function_kwargs
-    return function(**function_kwargs)
+    return function(*function_args, **function_kwargs)
 
 
 def position_the_part(part, diagram_part, diagram_dict):
     function = diagram_part.position_function
-    if function:
-        function_kwargs = diagram_part.position_kwargs
-        reference_label = function_kwargs.pop("reference")
-        reference_point = diagram_dict[reference_label]
-        getattr(part, function)(reference_point, **function_kwargs)
+    if function is None:
+        return
+
+    function_kwargs = diagram_part.position_kwargs
+    reference_label = diagram_part.reference
+    reference_mobject = diagram_dict[reference_label]
+
+    if function == "point_from_proportion":
+        if reference_mobject is None:
+            raise ValueError("Can't take proportion from an unspecified target mobject")
+        point = getattr(reference_mobject, function)(**function_kwargs)
+        part.move_to(point)
+
+    else:
+        getattr(part, function)(reference_mobject, **function_kwargs)
 
 
 def rotate_the_part(part, diagram_part):
@@ -37,11 +48,11 @@ def generate_part_of_the_diagram(diagram_part, diagram_dict):
     return part
 
 
-def apply_individual_action(action):
+def apply_individual_actions(section, diagram_dict):
     pass
 
 
-def apply_action(action):
+def apply_actions(section, diagram_dict):
     pass
 
 
@@ -55,12 +66,7 @@ def generate_diagram(sections):
             diagram_dict[part.label] = diagram_part
             diagram.add(diagram_part)
 
-        if section.individual_actions:
-            for action in section.individual_actions:
-                apply_individual_action(action)
-
-        if section.actions:
-            for action in section.actions:
-                apply_action(action)
+        apply_individual_actions(section, diagram_dict)
+        apply_actions(section, diagram_dict)
 
     return diagram, diagram_dict

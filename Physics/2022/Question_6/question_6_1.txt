@@ -1,2 +1,4 @@
+A learner investigates the relationship between the observed frequency and the frequency of sound waves emitted by a stationary source.
+The learner moves towards the source at a constant velocity and records the observed frequency $(f_L)$ for a given source frequency $(f_S)$. This process is repeated for different frequencies of the source, with the learner moving at the same constant velocity each time.\
 The graph below shows how the observed frequency changes as the frequency of sound waves emitted by the source changes.
 Name the phenomenon illustrated by the graph.

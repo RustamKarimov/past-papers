@@ -67,6 +67,7 @@ def display_paragraphs(scene: Scene, align_to: Tex, paragraphs: list, **kwargs) 
     tex_kwargs = {**default_kwargs, **kwargs}
     paragraph_group = VGroup()
     for paragraph in paragraphs:
+        print(paragraph)
         paragraph_tex = Tex(paragraph, **tex_kwargs)[0]
         paragraph_tex.next_to(alignment, DOWN, buff=0.3, aligned_edge=LEFT)
         alignment = paragraph_tex
