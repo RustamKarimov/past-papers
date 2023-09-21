@@ -11,7 +11,7 @@ from utilitites import graph_utilities as gu
 
 from settings.file_settings import BASE_DIR
 from settings.tex_settings import tick
-from settings.stage_settings import MEDIUM_TEX_SIZE
+from settings.stage_settings import MEDIUM_TEX_SIZE, TEXT_COLOR
 from settings import graph_settings as gs
 
 
@@ -32,7 +32,7 @@ class Question_6_1(Scene):
 
         question_title = titles[0]
         question_kwargs = {"tex_environment": lu.get_tabular_environment(p_size=8)}
-        _ = get_the_question(self, question_title, self.question, **question_kwargs)
+        paragraphs = get_the_question(self, question_title, self.question, **question_kwargs)
 
         graph_box = boxes[1]
         plot_settings = gs.PlotSettings()
@@ -73,4 +73,10 @@ class Question_6_1(Scene):
 
         self.play(Write(tick_1))
         self.wait()
-        
+
+        self.play(FadeToColor(paragraphs[1], YELLOW))
+        self.wait()
+
+        self.play(FadeToColor(paragraphs[1], TEXT_COLOR))
+        self.wait()
+

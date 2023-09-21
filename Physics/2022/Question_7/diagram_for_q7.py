@@ -75,7 +75,7 @@ ground_friction = ds.DiagramPart(
     function_kwargs=tex_kwargs,)
 
 section_1 = ds.Section(
-    parts=[ground, point_a, point_b, label_a, label_b, ground_friction]
+    shapes=[ground, point_a, point_b, label_a, label_b, ground_friction]
 )
 
 incline = ds.DiagramPart(
@@ -91,9 +91,21 @@ incline = ds.DiagramPart(
 
 )
 
-section_2 = ds.Section(
-    parts=[incline],
+end_of_ground = ds.DiagramPoint(
+    label="end_of_ground",
+    reference="ground",
+    function="get_end"
+)
 
+section_2 = ds.Section(
+    shapes=[incline],
+    points=[end_of_ground],
+    actions=[
+        ds.Action(
+            function="rotate",
+
+        )
+    ]
 )
 
 diagram_sections = [section_1, section_2]

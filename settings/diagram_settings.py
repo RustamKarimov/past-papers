@@ -19,14 +19,8 @@ class IndividualAction:
 @dataclass
 class Action:
     function: str
-    kwargs: dict
-
-
-@dataclass
-class Section:
-    parts: list
-    individual_actions: List[IndividualAction] = field(default_factory=lambda: [])
-    actions: List[Action] = field(default_factory=lambda: [])
+    args: list = field(default_factory=lambda: [])
+    kwargs: dict = field(default_factory=lambda: {})
 
 
 @dataclass
@@ -47,3 +41,20 @@ class DiagramPart:
     position_kwargs: dict = field(default_factory=lambda: {})
     rotation_kwargs: dict = field(default_factory=lambda: {})
 
+
+@dataclass
+class DiagramPoint:
+    label: str
+    reference: str
+    function: str
+
+    function_args: list = field(default_factory=lambda: [])
+    function_kwargs: dict = field(default_factory=lambda: {})
+
+
+@dataclass
+class Section:
+    shapes: List[DiagramPart]
+    points: List[DiagramPoint] = field(default_factory=lambda: [])
+    individual_actions: List[IndividualAction] = field(default_factory=lambda: [])
+    actions: List[Action] = field(default_factory=lambda: [])
