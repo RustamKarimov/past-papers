@@ -1,146 +1,55 @@
 from manim import *
 
-from settings import diagram_settings as ds
 from settings import stage_settings as ss
 
-from utilitites import diagram_utilities as du
-
-
+SCALE = 0.4
 tex_kwargs = {
-    "font_size": ss.MEDIUM_TEX_SIZE,
+    "font_size": ss.BIG_TEX_SIZE,
     "color": ss.TEXT_COLOR
 }
 
-ground = ds.DiagramPart(
-    label="ground",
-    function=Line
+ceiling = Line().scale(2)
+m_label = Tex("M", font_size=ss.BIG_TEX_SIZE, color=ss.BACKGROUND_COLOR)
+n_label = Tex("N", font_size=ss.BIG_TEX_SIZE, color=ss.BACKGROUND_COLOR)
+sphere_M = LabeledDot(m_label, radius=0.5)
+sphere_M.next_to(ceiling, DOWN, buff=1.25)
+sphere_N = LabeledDot(n_label, radius=0.5)
+sphere_N.next_to(sphere_M, DOWN, buff=2)
+
+tension = Line(ceiling.get_bottom(), sphere_M.get_top(), buff=0)
+dash_m = DashedLine().scale(0.5).next_to(sphere_M, RIGHT, buff=0)
+dash_n = dash_m.copy().next_to(sphere_N, RIGHT, buff=0)
+arrow = DoubleArrow(dash_m.get_right(), dash_n.get_right(), max_tip_length_to_length_ratio=0.2, buff=0)
+
+distance = Tex("0.3 m", **tex_kwargs)
+distance.next_to(arrow, RIGHT)
+
+charge_n = MathTex("Q_N = +8.6 \\times 10^{-8} \\, C", **tex_kwargs)
+charge_n.color = YELLOW
+charge_n.next_to(sphere_N, LEFT, buff=0.1)
+
+force_g = Arrow(max_tip_length_to_length_ratio=0.2, color=YELLOW).rotate(270 * DEGREES)
+force_g.next_to(sphere_N, DOWN, buff=0)
+
+force_e = Arrow(max_tip_length_to_length_ratio=0.2, color=YELLOW).rotate(90 * DEGREES)
+force_e.next_to(sphere_N, UP, buff=0)
+
+label_g = MathTex("F_g", **tex_kwargs)
+label_g.color = YELLOW
+label_g.next_to(force_g.get_end(), RIGHT, buff=0.2)
+
+label_e = MathTex("F_e", **tex_kwargs)
+label_e.color = YELLOW
+label_e.next_to(force_e.get_end(), LEFT, buff=0.2)
+
+keys = (
+    "ceiling", "sphere_m", "sphere_n", "tension", "dash_m", "dash_n", "arrow", "distance",
+    "charge_n", "force_g", "force_e", "label_g", "label_e"
+)
+items = (
+    ceiling, sphere_M, sphere_N, tension, dash_m, dash_n, arrow, distance,
+    charge_n, force_g, force_e, label_g, label_e
 )
 
-point_a = ds.DiagramPart(
-    label="point_a",
-    function=Dot,
-    position_function="point_from_proportion",
-    reference="ground",
-    position_kwargs={
-        "alpha": 0.1
-    }
-)
-
-label_a = ds.DiagramPart(
-    label="label_a",
-    function=Tex,
-    position_function="next_to",
-    reference="point_a",
-    position_kwargs={
-        "direction": DL,
-        "buff": 0.1
-    },
-    function_args=["A"],
-    function_kwargs=tex_kwargs,
-)
-
-point_b = ds.DiagramPart(
-    label="point_b",
-    function=Dot,
-    position_function="point_from_proportion",
-    reference="ground",
-    position_kwargs={
-        "alpha": 0.9
-    }
-)
-
-label_b = ds.DiagramPart(
-    label="label_b",
-    function=Tex,
-    position_function="next_to",
-    reference="point_b",
-    position_kwargs={
-        "direction": DR,
-        "buff": 0.1
-    },
-    function_args=["B"],
-    function_kwargs=tex_kwargs,
-)
-
-ground_friction = ds.DiagramPart(
-    label="ground_friction",
-    function=MathTex,
-    position_function="next_to",
-    reference="ground",
-    position_kwargs={
-        "direction": DOWN,
-        "buff": 0.1
-    },
-    function_args=["\\mu =0,2"],
-    function_kwargs=tex_kwargs,)
-
-section_1 = ds.Section(
-    shapes=[ground, point_a, point_b, label_a, label_b, ground_friction]
-)
-
-incline = ds.DiagramPart(
-    label="incline",
-    function=Line,
-    scale=1.5,
-    position_function="next_to",
-    reference="ground",
-    position_kwargs={
-        "direction": RIGHT,
-        "buff": 0
-    },
-
-)
-
-end_of_ground = ds.DiagramPoint(
-    label="end_of_ground",
-    reference="ground",
-    function="get_end"
-)
-
-section_2 = ds.Section(
-    shapes=[incline],
-    points=[end_of_ground],
-    actions=[
-        ds.Action(
-            function="rotate",
-
-        )
-    ]
-)
-
-diagram_sections = [section_1, section_2]
-
-diagram, diagram_dict = du.generate_diagram(diagram_sections)
-# point_a = ds.DiagramPart("point_a")
-# point_b = ds.DiagramPart("point_b")
-# label_a = ds.DiagramPart("label_a")
-# label_b = ds.DiagramPart("label_b")
-# ground_friction = ds.DiagramPart("ground_friction")
-#
-# section_1 = {
-#     "parts": [ground, point_a, point_b, label_a, label_b, ground_friction]
-# }
-#
-# incline = ds.DiagramPart("incline")
-# box_a = ds.DiagramPart("box_a")
-# mass_of_box_a = ds.DiagramPart("mass_of_box_a")
-# pulley = ds.DiagramPart("pulley")
-# tension = ds.DiagramPart("tension")
-# incline_friction = ds.DiagramPart("incline_friction")
-#
-# section_2 = {
-#     "parts": [incline, box_a, mass_of_box_a, pulley, tension, incline_friction],
-#     "individual_actions": {
-#         "name": "starting_point",
-#         "target": "incline",
-#         "function": "get_start",
-#     },
-#     "actions": {
-#         "function": "rotate",
-#         "function_kwargs": {
-#             "angle": 40,
-#             "about_point": "starting_point"
-#         }
-#     }
-# }
-
+diagram_dict = dict(zip(keys, items))
+diagram = VGroup(*items).scale(SCALE)

@@ -15,7 +15,7 @@ QUESTION = "7"
 SUB_QUESTION = "2"
 FILE = fs.BASE_DIR / SUBJECT / YEAR / f"Question_{QUESTION}" / f"question_{QUESTION}_{SUB_QUESTION}.py"
 SCENE = f"Question_{QUESTION}_{SUB_QUESTION}"
-QUALITY = "l"
+QUALITY = "h"
 CUSTOM_FOLDERS = "--custom_folders"
 DISABLE_CACHING = "--disable_caching" if DISABLE else ""
 
